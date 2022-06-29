@@ -1,42 +1,9 @@
 from tabnanny import verbose
 from MySQLdb import Date
 from django.db import models
-
-
+from django.contrib.auth.models import User
+from .utils import DEPT, ALL_LGA, GENDER,MARITAL_STATUS,STATES, ID_COLLECTED
 # TODO Remember to change null field values to False later i.e 'null=False'
-GENDER = (
-        ('male', 'Male'),
-        ('female', 'Female'),
-    )
-
-MARITAL_STATUS =(
-        ('single', 'Single'),
-        ('married', 'Married')
-    )
-STATES = (
-        ('abia', 'Abia'),
-        ('adamawa', 'Adamawa'),
-    )
-    
-ALL_LGA =(
-        ('ondo', 'ondo'),
-        ('dekina', 'Dekina'),
-    )
-
-
-DEPT = (
-        ('hrm', 'HRM'),
-        ('accounts', 'Accounts'),
-    )
-
-CADRE = (
-    ()
-)
-
-ID_COLLECTED = (
-    ('yes', 'Yes'),
-    ('no', 'No'),
-)
 
 
 class WorkDetails(models.Model):
@@ -68,7 +35,7 @@ class PersonalDetails(models.Model):
         verbose_name_plural = 'Personal Details'
 
     ID_number = models.ForeignKey(WorkDetails, on_delete=models.CASCADE)
-  
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
 
     surname = models.CharField(max_length=250, null=True, blank=True,)
     first_name = models.CharField(max_length=250, null=True, blank=True,)
@@ -80,7 +47,15 @@ class PersonalDetails(models.Model):
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     state_of_origin = models.CharField(choices=STATES, max_length=50, null=True, blank=True)
     lga =  models.CharField(choices=(ALL_LGA), max_length=50, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
 
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
     def __str__(self):
         return self.first_name
 
