@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'fav/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'fav/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'fav/favicon-16x16.png' %}">
+    
+    <link rel="stylesheet" href="{% static  'css/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}">
+    {% block title %}
+      {% if title %}
+        <title>{{title}} | Info-Web</title> 
+      {% else %}
+        <title>Info-Web</title>
+      {% endif %}
+    {% endblock title %}
+
+    {% block head %}
+    {% endblock head %}
+    
+</head>
+<body>
+  {% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <h4><a class="nav-item nav-link active" href="#">New</a></h4>
+        <h4><a class="nav-item nav-link" href="#">Edit</a></h4>
+        <h4><a class="nav-item nav-link" href="#">Find</a></h4>
+        <h4><a class="nav-item nav-link" href="#">Filter</a></h4>
+        <h4><a class="nav-item nav-link" href="#">Sort</a></h4>
+        <h4><a class="nav-item nav-link" href="#">Refresh</a></h4>
+        <h4><a class="nav-item nav-link" href="#">Export</a></h4>
+        <h4><a class="nav-item nav-link" href="#">Print</a></h4>
+      </div>
+    </div>
+  </nav>
+  {% endblock navbar %}
+    <main>
+      {% block content %}
+      {% endblock content %}
+    </main>
+</body>
+</html>
