@@ -17,15 +17,23 @@ from .decorators import allowed_users, unauthenticated_user
 
 
 def index(request):
-    context = {
+    personal_details = PersonalDetails.objects.all()
+    work_details = WorkDetails.objects.all()
 
+    context = {
+        'personal_details': personal_details,
+        'work_details':work_details,
     }
     return render(request, 'staff/index.html', context)
 
-def nominal_roll(request):
-    context = {
+def nominal_roll(request, pk):
 
+    personal_details = PersonalDetails.objects.get(ID_number=pk)
+
+    context = {
+        'personal_details': personal_details
     }
+
     return render(request, 'staff/nominal_roll.html', context)
 
 
