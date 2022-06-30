@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+<style>
+  .image {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
+</style>
+
+{% block content %}
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">ID number</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Rank</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for personal in personal_details %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ personal.ID_number }}</td>
+        <td>{{ personal.first_name}}</td>
+        <td>{{ personal.ID_number.rank }}</td>
+        <td><img class="image" src="{{ personal.image.url }}" width="30px" height="30px"> </td>
+      </tr>
+
+    {% empty%}
+    <tr>
+        <th scope="row">No Data</th>
+    </tr>
+    {% endfor%}
+
+    </tbody>
+  </table>
+{% endblock content%}
+<link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}">

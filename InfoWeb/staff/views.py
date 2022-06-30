@@ -18,11 +18,9 @@ from .decorators import allowed_users, unauthenticated_user
 
 def index(request):
     personal_details = PersonalDetails.objects.all()
-    work_details = WorkDetails.objects.all()
-
+    
     context = {
-        'personal_details': personal_details,
-        'work_details':work_details,
+        'personal_details': personal_details
     }
     return render(request, 'staff/index.html', context)
 

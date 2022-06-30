@@ -47,7 +47,7 @@ class PersonalDetails(models.Model):
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     state_of_origin = models.CharField(choices=STATES, max_length=50, null=True, blank=True)
     lga =  models.CharField(choices=(ALL_LGA), max_length=50, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(upload_to='upload/', null=True, blank=True)
 
     @property
     def imageURL(self):
