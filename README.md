@@ -4,7 +4,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/SimpleNiQue/I4GxZuri">
+  <a href="https://github.com/SimpleNiQue/Info-Web">
     <img src="./static/fav/android-chrome-512x512.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -16,11 +16,11 @@
     <a href="https://github.com/SimpleNiQue/I4GxZuri/docs/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://simplenique.github.io/I4GxZuri/">View Demo</a>
+    <a href="https://SimpleNiQue/Info-Web/">View Demo</a>
     ·
-    <a href="https://github.com/SimpleNiQue/I4GxZuri/issues">Report Bug</a>
+    <a href="https://github.com/SimpleNiQue/Info-Web/issues">Report Bug</a>
     ·
-    <a href="https://github.com/SimpleNiQue/I4GxZuri/issues">Request Feature</a>
+    <a href="https://github.com/SimpleNiQue/Info-Web/issues">Request Feature</a>
   </p>
 </div>
 
