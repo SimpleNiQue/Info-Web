@@ -1,36 +1,28 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 
 {% block content %}
-{% load static %}
+
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">S/N</th>
+        <th scope="col">ID_number</th>
+        <th scope="col">first_name</th>
+        <th scope="col">last_name</th>
       </tr>
     </thead>
     <tbody>
+
+    
       <tr>
         <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td>{{ personal_details.ID_number }}</td>
+        <td>{{ personal_details.first_name}}</td>
+        <td>{{ personal_details.last_name}}</td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
+
     </tbody>
   </table>
 {% endblock content%}
