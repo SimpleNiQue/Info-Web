@@ -24,23 +24,57 @@
     {% block head %}
     {% endblock head %}
     
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
 </head>
 <body>
   {% block navbar %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <h4><a class="nav-item nav-link active" href="#">New</a></h4>
-        <h4><a class="nav-item nav-link" href="#">Edit</a></h4>
-        <h4><a class="nav-item nav-link" href="#">Find</a></h4>
-        <h4><a class="nav-item nav-link" href="#">Filter</a></h4>
-        <h4><a class="nav-item nav-link" href="#">Sort</a></h4>
-        <h4><a class="nav-item nav-link" href="#">Refresh</a></h4>
-        <h4><a class="nav-item nav-link" href="#">Export</a></h4>
-        <h4><a class="nav-item nav-link" href="#">Print</a></h4>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <h4><a class="nav-item nav-link active" href="#">New</a></h4>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <h4><a class="nav-item nav-link" href="#">Edit</a></h4>
+          </li>
+          <li class="nav-item">
+            <h4><a class="nav-item nav-link" href="#">Filter</a></h4>
+          </li>
+          <li class="nav-item">
+            <h4><a class="nav-item nav-link" href="#">Sort</a></h4>
+          </li>
+          <li class="nav-item">
+            <h4><a class="nav-item nav-link" href="#">Refresh</a></h4>
+          </li>
+          <li class="nav-item">
+            <h4><a class="nav-item nav-link" href="#">Export</a></h4>
+          </li>
+          <li class="nav-item">
+            <h4><a class="nav-item nav-link" href="#">Print</a></h4>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
       </div>
     </div>
   </nav>
@@ -50,4 +84,5 @@
       {% endblock content %}
     </main>
 </body>
+<link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}">
 </html>
