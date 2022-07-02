@@ -1,5 +1,3 @@
-from tabnanny import verbose
-from MySQLdb import Date
 from django.db import models
 from django.contrib.auth.models import User
 from .utils import DEPT, ALL_LGA, GENDER,MARITAL_STATUS,STATES, ID_COLLECTED
@@ -21,6 +19,7 @@ class WorkDetails(models.Model):
     date_of_first_appointment = models.DateField(null=True, blank=True)
     rank = models.CharField(max_length=50, null=True, blank=True)
     grade_level = models.IntegerField(null=True, blank=True)
+    #TODO: ADD a step
     qualification = models.CharField(max_length=300, null=True, blank=True)
     remarks = models.CharField(max_length=500, null=True, blank=True)
 
@@ -35,8 +34,7 @@ class PersonalDetails(models.Model):
         verbose_name_plural = 'Personal Details'
 
     ID_number = models.ForeignKey(WorkDetails, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
-
+    
     surname = models.CharField(max_length=250, null=True, blank=True,)
     first_name = models.CharField(max_length=250, null=True, blank=True,)
     middle_name = models.CharField(max_length=250, null=True, blank=True,)
