@@ -71,6 +71,13 @@
             <h4><a class="nav-item nav-link" href="#">Print</a></h4>
           </li>
         </ul>
+        
+          {% if user.is_authenticated %}
+            <span class="nav-item text-light">Welcome {{ user.username }}</span>
+            <span class="nav-item nav-link"><a href="{% url 'staff:logout'%}">Logout</a></span>
+          {% else %}
+          <span class="nav-item nav-link"><a href="{% url 'staff:login'%}">Login</a></span>
+          {% endif %}
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
