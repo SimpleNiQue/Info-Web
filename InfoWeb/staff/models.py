@@ -58,5 +58,11 @@ class PersonalDetails(models.Model):
         return self.first_name
 
 
+class InfoWebUser(models.Model):
+    """Every Registered User"""
+
+    class Meta:
+        verbose_name_plural = 'InfoWeb Users'
+    name = models.CharField(primary_key=True, max_length=200)
     
 
