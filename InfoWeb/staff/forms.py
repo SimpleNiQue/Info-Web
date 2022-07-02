@@ -17,4 +17,8 @@ class PersonalDetailsForm(ModelForm):
     class Meta:
         model = PersonalDetails
         fields = '__all__'
-        exclude = ['user']
+
+class WorkDetailsForm(ModelForm):
+    class Meta:
+        model =WorkDetails
+        fields = '__all__'
