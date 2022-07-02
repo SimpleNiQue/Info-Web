@@ -1,9 +1,11 @@
 from django.urls import path
-from .views import index, nominal_roll
+from .views import IndexView, login_user, register, log_out
 
 
 app_name = 'staff'
 urlpatterns = [
-    path('', index, name='home'),
-    path('nominal-roll/<str:pk>/', nominal_roll, name='norminal_roll')
+    path('', IndexView.as_view(), name='home'),
+    path('register/', register, name='register'),
+    path('login/', login_user, name='login' ),
+    path('logout/', log_out, name='logout'),
 ]
