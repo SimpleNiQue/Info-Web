@@ -1,5 +1,6 @@
 #* Django imports
 from typing import Optional
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -15,6 +16,8 @@ from .models import PersonalDetails
 from .forms import PersonalDetails, CreateUserForm, PersonalDetailsForm, WorkDetailsForm
 from .decorators import allowed_users, unauthenticated_user
 from django.views.generic import ListView, DetailView
+
+from staff import models
 #==============================================================
 
 
@@ -25,6 +28,23 @@ class IndexView(ListView):
 
     def get_queryset(self):
         return PersonalDetails.objects.all()
+
+
+class DashboardView(DetailView):
+  model: models = PersonalDetails
+  template_name: str =  'staff/dashboard.html'
+  context_object_name: Optional[str] = 'personal'
+
+  def get_queryset(self):
+        return PersonalDetails.objects.all()
+
+
+class NewStaffView(ListView):
+  template_name: str = 'staff/new_staff'
+  context_object_name: Optional[str] = 'new_staff'
+
+  def get_queryset(self):
+    return
 
 # TODO: Bring back unauthentication decorator
 def login_user(request):
@@ -50,7 +70,7 @@ def login_user(request):
 def log_out(request):
   logout(request)
   print(request.user.username, 'logged out')
-  return render(request,'staff/index.html')
+  return HttpResponse("You Have Been Logged out")
 
 # Registers a new user
 # TODO: Bring back unauthentication decorator
@@ -60,7 +80,7 @@ def register(request):
   if request.method=='POST':
     form = CreateUserForm(request.POST)
     if form.is_valid():
-      user = form.save()
+      form.save()
       username = form.cleaned_data.get('username')
       
       

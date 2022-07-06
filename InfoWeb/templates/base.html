@@ -74,6 +74,7 @@
         
           {% if user.is_authenticated %}
             <span class="nav-item text-light">Welcome {{ user.username }}</span>
+            <span class="nav-item text-light"><a href="{% url 'staff:dashboard' user.id %}">Dashboard</a></span>
             <span class="nav-item nav-link"><a href="{% url 'staff:logout'%}">Logout</a></span>
           {% else %}
           <span class="nav-item nav-link"><a href="{% url 'staff:login'%}">Login</a></span>

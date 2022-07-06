@@ -15,7 +15,7 @@
 
 {% block content %}
 
-  <table class="table table-hover">
+  <table class="table table-responsive table-hover">
     <thead>
       <tr>
         <th scope="col">S/N</th>
@@ -43,7 +43,14 @@
     {% for personal in personal_details %}
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
-        <td>{{ personal.ID_card }}</td>
+
+        <td>
+          {% if personal.ID_number.ID_card == 'yes' %}
+            <input type="checkbox" name="id-card" checked>
+          {% else %}
+            <input type="checkbox" name="id-card">
+          {% endif %}
+        </td>
         <td>{{ personal.ID_number}}</td>
         <td>{{ personal.ID_number.file_number }}</td>
         <td>{{ personal.surname }}</td>
@@ -71,4 +78,5 @@
     </tbody>
   </table>
   <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}">
+
 {% endblock content%}
