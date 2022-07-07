@@ -1,3 +1,4 @@
+import fileinput
 from django.db import models
 from django.contrib.auth.models import User
 from .utils import DEPT, ALL_LGA, GENDER,MARITAL_STATUS,STATES, ID_COLLECTED
@@ -58,11 +59,16 @@ class PersonalDetails(models.Model):
         return self.first_name
 
 
+
 class InfoWebUser(models.Model):
     """Every Registered User"""
 
     class Meta:
         verbose_name_plural = 'InfoWeb Users'
-    name = models.CharField(primary_key=True, max_length=200)
-    
+    #TODO: Remember to add user field, add to pre_save signal and exclude from form
+    user =models.ForeignKey(User, on_delete=models.CASCADE)
 
+    first_name = models.CharField(max_length=200, null=True, blank=True)
+    id = models.CharField(primary_key=True, max_length=200)
+    file_number = models.CharField(max_length=200, null=True, blank=True)
+    

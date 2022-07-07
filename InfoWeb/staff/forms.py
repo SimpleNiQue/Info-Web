@@ -3,9 +3,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User 
 from django import forms
 
-from.models import PersonalDetails, WorkDetails
+from.models import InfoWebUser, PersonalDetails, WorkDetails
 
 
+class NewUserForm(ModelForm):
+    class Meta:
+        model = InfoWebUser
+        fields ='__all__'
+        exclude = ['user',]
 
 class CreateUserForm(UserCreationForm):
     class Meta:

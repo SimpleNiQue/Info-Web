@@ -30,12 +30,7 @@
 						<div class="input-group mb-2">
 							<input type="password" name="password" id="password">
 						</div>
-
-						<div class="input-group mb-2">
-							<label>
-								<input type="checkbox" value="remember-me"> Remember me
-							  </label>
-						</div>
+						
               {% for msg in messages%}
                 <p style="text-align: center;">{{ msg }}</p>
               {% endfor %}
@@ -47,8 +42,13 @@
 		
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
-						New Here? <a href="{% url 'staff:register' %}" class="ml-2">Register</a>
+						<a href="#" class="ml-2">Forgot Password&quest;</a>
 					</div>
+
+					<div class="d-flex justify-content-center links">
+						New Here&quest; <a href="{% url 'staff:register' %}" class="ml-2">Register</a>
+					</div>
+
 				</div>
 			</div>
 		</div>
