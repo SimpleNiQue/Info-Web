@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+<style>
+  .image {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
+
+  td,thead{
+    text-align: center;
+  }
+</style>
+
+{% block content %}
+
+  <table class="table table-responsive table-hover">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">ID Card</th>
+        <th scope="col">ID No.</th>
+        <th scope="col">File No.</th>
+        <th scope="col">Surname</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Middle Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Marital Status</th>
+        <th scope="col">State of Origin</th>
+        <th scope="col">LGA</th>
+        <th scope="col">State Directorate</th>
+        <th scope="col">Department</th>
+        <th scope="col">Date of First Appointment</th>
+        <th scope="col">Rank</th>
+        <th scope="col">GL/Step</th>
+        <th scope="col">Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for personal in personal_details %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+
+        <td>
+          {% if personal.ID_number.ID_card == 'yes' %}
+            <input type="checkbox" name="id-card" checked>
+          {% else %}
+            <input type="checkbox" name="id-card">
+          {% endif %}
+        </td>
+        <td>{{ personal.ID_number}}</td>
+        <td>{{ personal.ID_number.file_number }}</td>
+        <td>{{ personal.surname }}</td>
+        <td>{{ personal.firstname }}</td>
+        <td>{{ personal.middle_name }}</td>
+        <td>{{ personal.gender }}</td>
+        <td>{{ personal.date_of_birth }}</td>
+        <td>{{ personal.marital_status }}</td>
+        <td>{{ personal.state_of_origin }}</td>
+        <td>{{ personal.lga }}</td>
+        <td>{{ personal.ID_number.state_directorate }}</td>
+        <td>{{ personal.ID_number.department }}</td>
+        <td>{{ personal.ID_number.date_of_first_appointment }}</td>
+        <td>{{ personal.ID_number.rank}}</td>
+        <td>{{ personal.ID_number.grade_level}}/{% comment%}<!--TODO: Add a step Here-->{% endcomment %}Step</td>
+        <td>{{ personal.ID_number.remarks}}</td>
+      </tr>
+
+    {% empty%}
+    <tr>
+        <th scope="row">No Data</th>
+    </tr>
+    {% endfor%}
+
+    </tbody>
+  </table>
+  <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}">
+
+{% endblock content%}
