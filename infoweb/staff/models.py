@@ -34,7 +34,7 @@ class PersonalDetails(models.Model):
     class Meta:
         verbose_name_plural = 'Personal Details'
 
-    work_id_number = models.OneToOneField(WorkDetails, on_delete=models.CASCADE, related_name='personal_id')
+    work_id_number = models.OneToOneField(WorkDetails, on_delete=models.CASCADE, related_name='personal_detail')
     surname = models.CharField(max_length=250, null=True, blank=True,)
     first_name = models.CharField(max_length=250, null=True, blank=True,)
     
@@ -65,5 +65,9 @@ class LinkedAccount(models.Model):
 
     class Meta:
         verbose_name_plural = 'Linked Accounts'
-    user =models.ForeignKey(User, on_delete=models.CASCADE)
+
+    user =models.ForeignKey(User, on_delete=models.CASCADE, related_name='linked_account')
+
+    def __str__(self):
+        return self.user.username
     

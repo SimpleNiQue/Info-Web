@@ -1,5 +1,6 @@
 #* Django imports
 from typing import Optional
+from zoneinfo import available_timezones
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -42,7 +43,7 @@ def login_user(request):
     if user is not None:
       login(request, user)
       print(username, 'logged in')
-      return redirect('staff:dashboard', pk=user.id)
+      return redirect('staff:dashboard', pk=str(request.user.id))
       
     else: messages.error(request, 'Account not Registered')
   
@@ -80,58 +81,63 @@ def register(request):
 def dashboard(request, pk):
   context: dict = {}
 
-  try:
-    personal = LinkedAccount.objects.get(id=pk)
-    context['personal'] = personal
-    
-  except Exception as error:
-    print(f"{error=}")
-    return redirect('staff:link_account', pk=pk)
+  if str(request.user.id) == pk:
+
+    try:
+      work = WorkDetails.objects.get(user=pk)
+      context['work'] = work
+      
+    except Exception as error:
+      print(f"{error=}")
+      return redirect('staff:link_account')
+
+  else:
+    print('Please Login First')
+    return HttpResponse("Please Login First")
   
   return render(request, 'staff/dashboard.html', context)
 
 
 
 @login_required(login_url='staff:login')
-def link_account(request, pk):
+def link_account(request):
   
-  # if this is a POST request we need to process the form data
   if request.method == 'POST':
-    # create a form instance and populate it with data from the request:
-    form = LinkAccountForm(request.POST)
-    # check whether it's valid:
-    if form.is_valid():
-      # process the data in form.cleaned_data as required
-      # ...
 
-      # Get the data from the form
-      user = request.user.username
-      user_id = form.cleaned_data['ID_number']
-      file_number = form.cleaned_data['file_number']
+    #Check if account was linked before now to avoid duplicates
+    available_linked_users = LinkedAccount.objects.all()
+    if request.user in available_linked_users:
+      return redirect('staff:dashboard', pk=str(request.user.id))
 
-      #Check if the data corresponds from the database
+    else: 
+      form = LinkAccountForm(request.POST)
+      if form.is_valid():
       
-      try:
-        person_details = PersonalDetails.objects.get(ID_number=user_id)
+        collected_user_id = form.cleaned_data['id_number']
+        collected_first_name = form.cleaned_data['first_name']
 
-        ID, FILE = (person_details.ID_number,person_details.ID_number.file_number,)
+        #Check if the data corresponds from the database  
+        try:
+          work_details = WorkDetails.objects.get(user=request.user)
+          ID, FILE = (work_details.ID_number, work_details.personal_detail.first_name,)
 
-      except AttributeError as err:
-        messages.error(request, "such User does not exist")
-        print(f"{err=}")
+        except AttributeError as err:
+          messages.error(request, "such User does not exist")
+          print(f"{err=}")
 
-      else:
-  
-        if (ID==user_id and FILE==file_number):
-          form.save()
-          print("\nNew User Added/Linked")
-          return redirect('staff:dashboard', pk=pk) 
         else:
-          # If none matches
-          messages.error(request, "Invalid Credentials !!!")
- 
+    
+          if (ID==collected_user_id and FILE==collected_first_name):
+            form.save(request.user)
+            print("\nNew User Added/Linked")
+          
+            return redirect('staff:dashboard', pk=str(request.user.id)) 
+          
+          else:
+            messages.error(request, "Invalid Credentials !!!")
+  
 
-  # if a GET (or any other method) we'll create a blank form
+    # if a GET (or any other method) we'll create a blank form
   else:
       form = LinkAccountForm()
 

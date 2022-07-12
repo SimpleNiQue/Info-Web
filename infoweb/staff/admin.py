@@ -1,3 +1,7 @@
 from django.contrib import admin
+from.models import LinkedAccount, WorkDetails, PersonalDetails
 
-# Register your models here.
+admin.site.register(PersonalDetails)
+admin.site.register(WorkDetails)
+admin.site.register(LinkedAccount)
+

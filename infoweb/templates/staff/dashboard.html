@@ -141,17 +141,17 @@
                 <th scope="row">1</th>
         
                 <td>
-                  {% if personal.ID_number.ID_card == 'yes' %}
+                  {% if work.ID_card == 'yes' %}
                     <input type="checkbox" name="id-card" checked>
                   {% else %}
                     <input type="checkbox" name="id-card">
                   {% endif %}
                 </td>
-                <td>{{ personal.user.ID_number}}</td>
-                <td>{{ personal.ID_number.file_number }}</td>
-                <td>{{ personal.surname }}</td>
-                <td>{{ personal.firstname }}</td>
-                <td>{{ personal.middle_name }}</td>
+                <td>{{ work.ID_number}}</td>
+                <td>{{ work.file_number }}</td>
+                <td>{{ work.personal_detail.surname }}</td>
+                <td>{{ work.personal_detail.first_name }}</td>
+                <td>{{ work.personal_detail.middle_name }}</td>
                 
               </tr>
       </table>
