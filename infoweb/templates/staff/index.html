@@ -33,10 +33,24 @@
             font-size: 3.5rem;
             }
         }
+
+        .infoweb{
+          color: rgb(119, 71, 9);
+        }
         </style>
     {% endblock style %}
 
 {% block content %}
+
+<script>
+  msg = '{{ message }}'
+  function pop_up(msg){
+    if (msg != 0) {
+      alert("You Have Been Logged Out !!")
+    }
+  }
+</script>
+
   <h1 class="visually-hidden">Home Page</h1>
 
   <div class="b-example-divider"></div>
@@ -44,18 +58,18 @@
   <div class="container my-5">
     <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-        <h1 class="display-4 fw-bold lh-1">Welcome to InfoWeb</h1>
-        <p class="lead">InfoWeb Looks to make Interaction with infoclip  a lot SIMPLER. What will YOU Like to do&quest;</p>
+        <h1 class="display-4 fw-bold lh-1">Welcome to <span class="infoweb">InfoWeb</span></h1>
+        <p class="lead"><span class="infoweb">InfoWeb</span> Looks to make Interaction with infoclip  a lot SIMPLER. What will YOU Like to do&quest;</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
 
           <a href="http://" type="button" class="btn btn-outline-secondary btn-lg px-4" target="_blank" rel="noopener noreferrer">Upload Passport</a>
-          <a href="http://" type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" target="_blank" rel="noopener noreferrer">Login</a>
-          <a href="http://" type="button" class="btn btn-warning btn-lg px-4" target="_blank" rel="noopener noreferrer">Register</a>
+          <a href="{% url 'staff:login'%}" type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" target="_blank" rel="noopener noreferrer">Login</a>
+          <a href="{% url 'staff:register' %}" type="button" class="btn btn-warning btn-lg px-4" target="_blank" rel="noopener noreferrer">Register</a>
 
         </div>
       </div>
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-          <img class="rounded-lg-3" src="{% static 'images/me.jpg'%}" alt="" width="90%" height="100%">
+          <img class="rounded-lg-3" src="{% static 'images/databank2.jpeg'%}" alt="" width="90%" height="100%">
       </div>
     </div>
   </div>

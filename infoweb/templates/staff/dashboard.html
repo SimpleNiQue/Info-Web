@@ -1,21 +1,14 @@
-{% load static %}
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'fav/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'fav/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'fav/favicon-16x16.png' %}">
-    <link rel="stylesheet" href="{% static  'js/custom/dashboard.js' %}">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Staff DashBoard</title>
-
-    <!-- Bootstrap core CSS -->    
-    <link rel="stylesheet" href="{% static  'css/bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.min.js' %}">
+    {% extends 'base.html' %}
+    {% load static%}
+    
+    {% block title %}
+      <title> {{ request.user.username }} · InfoWeb </title>
+    {% endblock title %}
+    
+    {% block style %}
+      <link rel="stylesheet" href="{% static  'js/custom/dashboard.js' %}">
+      <link rel="stylesheet" href="{% static  'css/bootstrap/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.min.js' %}">
 
     <style>
       .bd-placeholder-img {
@@ -33,12 +26,11 @@
       }
     </style>
 
-    
-    <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.min.js' %}">
-  </head>
-  <body>
+    {% endblock style %}
     
+    {% block content %}
+
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">InfoWeb</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +99,6 @@
         {% endcomment %}
       {% endblock canvas %}
       
-      {% block main_content %}
       <h2>Personal Details</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
@@ -171,10 +162,9 @@
                   <td>{{ work.personal_detail.gender }}</td>
               </tr>
       </table>
-      {% endblock main_content%}
     </main>
   </div>
 </div>
-<link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}">
-  </body>
-</html>
+
+<script src="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+{% endblock content %}

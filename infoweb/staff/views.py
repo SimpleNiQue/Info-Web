@@ -1,4 +1,5 @@
 #* Django imports
+from audioop import reverse
 from typing import Optional
 from zoneinfo import available_timezones
 from django.http import HttpResponse, HttpResponseRedirect
@@ -16,7 +17,6 @@ from django.contrib.auth.models import Group
 from .models import LinkedAccount, PersonalDetails, WorkDetails
 from .forms import LinkAccountForm, PersonalDetails, CreateUserForm
 from .decorators import allowed_users, unauthenticated_user
-from django.views.generic import ListView, DetailView
 
 #==============================================================
 
@@ -51,7 +51,8 @@ def login_user(request):
 def log_out(request):
   logout(request)
   print(request.user.username, 'logged out')
-  return HttpResponse("You Have Been Logged out")
+
+  return redirect('staff:home')
 
 
 # Registers a new user
