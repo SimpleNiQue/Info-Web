@@ -2,95 +2,33 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block head %}
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'fav/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'fav/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'fav/favicon-16x16.png' %}">
-    
-    <link rel="stylesheet" href="{% static  'css/bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.min.js' %}">
-    {% block title %}
-      {% if title %}
-        <title>{{title}} | Info-Web</title> 
-      {% else %}
-        <title>Info-Web</title>
-      {% endif %}
-    {% endblock title %}
+      <link rel="apple-touch-icon" sizes="180x180" href="{% static 'fav/apple-touch-icon.png' %}">
+      <link rel="icon" type="image/png" sizes="32x32" href="{% static 'fav/favicon-32x32.png' %}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{% static 'fav/favicon-16x16.png' %}">
+      
+      <link rel="stylesheet" href="{% static  'css/bootstrap/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.min.js' %}">
+      {% block title %}
+      {% endblock title %}
 
-    {% block head %}
-    {% endblock head %}
-    
+      {% block style %}
+      {% endblock style %}
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+  </head>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-</head>
+{% endblock head %}
+  
 <body>
-  {% block navbar %}
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <div class="container-fluid">
-      <h4><a class="nav-item nav-link active" href="#">New</a></h4>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <h4><a class="nav-item nav-link" href="#">Edit</a></h4>
-          </li>
-          <li class="nav-item">
-            <h4><a class="nav-item nav-link" href="#">Filter</a></h4>
-          </li>
-          <li class="nav-item">
-            <h4><a class="nav-item nav-link" href="#">Sort</a></h4>
-          </li>
-          <li class="nav-item">
-            <h4><a class="nav-item nav-link" href="#">Refresh</a></h4>
-          </li>
-          <li class="nav-item">
-            <h4><a class="nav-item nav-link" href="#">Export</a></h4>
-          </li>
-          <li class="nav-item">
-            <h4><a class="nav-item nav-link" href="#">Print</a></h4>
-          </li>
-        </ul>
-        
-          {% if user.is_authenticated %}
-            <span class="nav-item text-light">Welcome {{ user.username }}</span>
-            <span class="nav-item text-light"><a href="{% url 'staff:dashboard' user.id %}">Dashboard</a></span>
-            <span class="nav-item nav-link"><a href="{% url 'staff:logout'%}">Logout</a></span>
-          {% else %}
-          <span class="nav-item nav-link"><a href="{% url 'staff:login'%}">Login</a></span>
-          {% endif %}
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-  {% endblock navbar %}
-    <main>
+  
       {% block content %}
       {% endblock content %}
-    </main>
+
 </body>
-<link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}">
+<script src="{% static  'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
 </html>

@@ -1,27 +1,24 @@
+{% extends 'base.html' %}
+
 {% load static %}
 
 
-{% load static %}
+	{% block title %}
+        <title>Link Account · InfoWeb</title>
+    {% endblock title %}
 
-<!DOCTYPE html>
-<html>
-    
-<head>
-	<title>Link Account</title>
-
-	<link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}">
+	{% block style %}
 	<link rel="stylesheet" href="{% static 'css/custom/login_style.css'%}">
-	  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'fav/apple-touch-icon.png' %}">
-	  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'fav/favicon-32x32.png' %}">
-	  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'fav/favicon-16x16.png' %}">
-	  <style>
-		.msg{
-			text-align: center;
-		}
-	  </style>
-</head>
 
-<body>
+	  	<style>
+			.msg{
+				text-align: center;
+			}
+		</style>
+	{% endblock style %}
+
+
+	{% block content%}
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
@@ -72,5 +69,4 @@
 			form_fields[field].className += ' form-control'
 		}
 	</script>
-</body>
-</html>
+{% endblock content%}

@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'staff'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='home'),
+    path('', views.index, name='home'),
     path('dashboard/<str:pk>/', views.dashboard, name='dashboard'),
     path('link-account/', views.link_account, name='link_account'),
     path('register/', views.register, name='register'),

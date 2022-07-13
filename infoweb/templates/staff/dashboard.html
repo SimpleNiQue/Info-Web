@@ -35,7 +35,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static  'js/bootstrap/bootstrap.min.js' %}">
   </head>
   <body>
     
@@ -61,29 +61,9 @@
             <a class="nav-link active" aria-current="page" href="#">
               <span data-feather="home"></span>
               {% if user.is_authenticated %}
-                {{ user.username|title }}
+                <img src="{{ work.personal_detail.image.url }}" alt="image" width="15%" height="15%" style="border-radius: 50%;"> {{ user.username|title }}
               {% endif %}
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file"></span>
-              Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              Settings
-            </a>
-          </li>
-        </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>Staff Support</span>
@@ -95,7 +75,14 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text"></span>
-              Feedback/Suggestion
+              Feedback
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Upload Passport
             </a>
           </li>
           
@@ -105,57 +92,85 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">{{user.username|title}}'s Dashboard</h1>
+        <h1 class="h2"><img src="{{ work.personal_detail.image.url }}" alt="image" width="15%" height="15%" style="border-radius: 50%;">  {{user.username|title}}'s Dashboard</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
         </div>
       </div>
 
       {% block canvas %}
-        <canvas class="my-4 w-100" id="myChart" width="900" height="38"></canvas>
+        {% comment %}
+          <canvas class="my-4 w-100" id="myChart" width="900" height="38"></canvas>
+        {% endcomment %}
       {% endblock canvas %}
       
       {% block main_content %}
-      <h2>Section title</h2>
+      <h2>Personal Details</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
               <tr>
-                <th scope="col">S/N</th>
-                <th scope="col">ID Card</th>
-                <th scope="col">ID No.</th>
-                <th scope="col">File No.</th>
-                <th scope="col">Surname</th>
                 <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
                 <th scope="col">Middle Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Date of Birth</th>
               </tr>
             </thead>
-              <tr>
-                <th scope="row">1</th>
-        
-                <td>
-                  {% if work.ID_card == 'yes' %}
-                    <input type="checkbox" name="id-card" checked>
-                  {% else %}
-                    <input type="checkbox" name="id-card">
-                  {% endif %}
-                </td>
-                <td>{{ work.ID_number}}</td>
-                <td>{{ work.file_number }}</td>
-                <td>{{ work.personal_detail.surname }}</td>
-                <td>{{ work.personal_detail.first_name }}</td>
-                <td>{{ work.personal_detail.middle_name }}</td>
-                
+              <tr>        
+                  <td>{{ work.personal_detail.first_name }}</td>
+                  <td>{{ work.personal_detail.surname }}</td>
+                  <td>{{ work.personal_detail.middle_name }}</td>
+                  <td>{{ work.personal_detail.gender }}</td>
+                  <td>{{ work.personal_detail.date_of_birth }}</td>
+              </tr>
+              
+              <br>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">State of Origin</th>
+                    <th scope="col">Local Government Area</th>
+                    <th scope="col">Marital Status</th>
+                  </tr>
+                </thead>
+                  <tr>
+                    <td>{{ work.personal_detail.phone_number }}</td>
+                    <td>{{ work.personal_detail.state_of_origin }}</td>
+                    <td>{{ work.personal_detail.lga }}</td>
+                    <td>{{ work.personal_detail.marital_status }}</td>
+                  </tr>  
               </tr>
       </table>
       </div>
+
+      <br>
+      <br>
+
+      <h2>Work Details</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+              <tr>
+                <th scope="col">Date of First Appointment</th>
+                <th scope="col">Date of Present Appointment</th>
+                <th scope="col">Designation/Rank</th>
+                <th scope="col">Grade Level/Step</th>
+                <th scope="col">State Directorate</th>
+              </tr>
+            </thead>
+              <tr>        
+                  <td>{{ work.personal_detail.first_name }}</td>
+                  <td>{{ work.personal_detail.surname }}</td>
+                  <td>{{ work.personal_detail.middle_name }}</td>
+                  <td>{{ work.personal_detail.gender }}</td>
+                  <td>{{ work.personal_detail.gender }}</td>
+              </tr>
+      </table>
       {% endblock main_content%}
     </main>
   </div>

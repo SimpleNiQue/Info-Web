@@ -20,14 +20,11 @@ from django.views.generic import ListView, DetailView
 
 #==============================================================
 
+@unauthenticated_user
+def index(request):
+  context = {}
+  return render(request, 'staff/index.html', context)
 
-
-class IndexView(ListView):
-    template_name: str = 'staff/index.html'
-    context_object_name: Optional[str] = 'personal_details'
-
-    def get_queryset(self):
-        return PersonalDetails.objects.all()
 
 
 @unauthenticated_user
@@ -78,10 +75,10 @@ def register(request):
 
 
 @login_required(login_url='staff:login')
-def dashboard(request, pk):
+def dashboard(request, pk, **kwarg):
   context: dict = {}
 
-  if str(request.user.id) == pk:
+  if str(request.user.id) == str(pk):
 
     try:
       work = WorkDetails.objects.get(user=pk)
@@ -92,7 +89,7 @@ def dashboard(request, pk):
       return redirect('staff:link_account')
 
   else:
-    print('Please Login First')
+    print(f'Please Login First, request.user:{request.user}, pk:{pk}')
     return HttpResponse("Please Login First")
   
   return render(request, 'staff/dashboard.html', context)
@@ -101,13 +98,13 @@ def dashboard(request, pk):
 
 @login_required(login_url='staff:login')
 def link_account(request):
+  available_linked_users = [ str(name) for name in LinkedAccount.objects.all()]
   
   if request.method == 'POST':
 
     #Check if account was linked before now to avoid duplicates
-    available_linked_users = LinkedAccount.objects.all()
-    if request.user in available_linked_users:
-      return redirect('staff:dashboard', pk=str(request.user.id))
+    if str(request.user) in available_linked_users:
+      return redirect('staff:dashboard', pk=request.user.id)
 
     else: 
       form = LinkAccountForm(request.POST)
@@ -131,7 +128,7 @@ def link_account(request):
             form.save(request.user)
             print("\nNew User Added/Linked")
           
-            return redirect('staff:dashboard', pk=str(request.user.id)) 
+            return redirect('staff:dashboard', pk=request.user.id, user=request.user) 
           
           else:
             messages.error(request, "Invalid Credentials !!!")
@@ -139,6 +136,12 @@ def link_account(request):
 
     # if a GET (or any other method) we'll create a blank form
   else:
+
+    #Check if account was linked before now to avoid duplicates
+    if str(request.user) in available_linked_users:
+      return redirect('staff:dashboard', pk=request.user.id)
+
+    else: 
       form = LinkAccountForm()
 
   return render(request, 'staff/link_account.html', {'form': form})
