@@ -1,7 +1,4 @@
 #* Django imports
-from audioop import reverse
-from typing import Optional
-from zoneinfo import available_timezones
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -26,7 +23,7 @@ def index(request):
   return render(request, 'staff/index.html', context)
 
 
-
+#login
 @unauthenticated_user
 def login_user(request):
   if request.method =='POST':
@@ -45,6 +42,7 @@ def login_user(request):
     else: messages.error(request, 'Account not Registered')
   
   return render(request, 'staff/login.html')
+
 
 #Logout
 @login_required(login_url='staff:login')
@@ -72,6 +70,7 @@ def register(request):
       messages.error(request, 'Incorrect credentials')
         
   context = {'form':form}
+  
   return render(request,'staff/register.html', context)
 
 
