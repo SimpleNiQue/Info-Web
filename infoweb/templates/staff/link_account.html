@@ -1,6 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% block title %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
 <title>Link Account · InfoWeb</title>
-{% endblock title %} {% block style %}
+{% endblock title %}
+
+{% block style %}
 <link rel="stylesheet" href="{% static 'css/custom/login_style.css'%}" />
 
 <style>
@@ -8,7 +13,9 @@
     text-align: center;
   }
 </style>
-{% endblock style %} {% block content%}
+{% endblock style %}
+
+{% block content%}
 <div class="container h-100">
   <div class="d-flex justify-content-center h-100">
     <div class="user_card">
@@ -18,7 +25,9 @@
 
       <div class="d-flex justify-content-center form_container">
         <form method="POST">
-          {% csrf_token %} {% comment %}
+          {% csrf_token %}
+          
+          {% comment %}
           <!-- TODO: Handle with signals later -->
           <!-- TODO: Change user to first name and last name-->
           {% endcomment %}
@@ -46,4 +55,5 @@
     form_fields[field].className += " form-control";
   }
 </script>
+
 {% endblock content%}
