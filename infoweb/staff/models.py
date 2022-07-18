@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .utils import DEPT, ALL_LGA, GENDER,MARITAL_STATUS,STATES, ID_COLLECTED
+from .utils import DEPT, ALL_LGA, GENDER,MARITAL_STATUS,STATES, ID_COLLECTED, GL_and_STEP
 # TODO Remember to change null field values to False later i.e 'null=False'
 
 
@@ -17,9 +17,9 @@ class WorkDetails(models.Model):
 
     state_directorate=  models.CharField(choices=(STATES), max_length=50, null=True, blank=True) 
     date_of_first_appointment = models.DateField(null=True, blank=True)
+    # date_of_present_appointment = models.DateField(null=True, blank=True)
     rank = models.CharField(max_length=50, null=True, blank=True)
-    grade_level = models.IntegerField(null=True, blank=True)
-    #TODO: ADD a step
+    
     
     qualification = models.CharField(max_length=300, null=True, blank=True)
     remarks = models.CharField(max_length=500, null=True, blank=True)
