@@ -1,0 +1,19 @@
+div:nth-child(1){
+    background-color: aqua;
+}
+
+div:nth-child(2){
+    background-color: rgb(0, 255, 13);
+}
+div:nth-child(3){
+    background-color: rgb(217, 255, 0);
+}
+div:nth-child(4){
+    background-color: rgb(255, 0, 43);
+}
+div:nth-child(5){
+    background-color: rgb(153, 0, 255);
+}
+div:nth-child(6){
+    background-color: rgb(138, 163, 163);
+}
