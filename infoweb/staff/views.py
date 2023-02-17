@@ -75,7 +75,7 @@ def register(request):
 
 
 @login_required(login_url='staff:login')
-def dashboard(request, pk, **kwarg):
+def dashboard(request, pk):
   context: dict = {}
 
   if str(request.user.id) == str(pk):
@@ -85,6 +85,7 @@ def dashboard(request, pk, **kwarg):
       context['work'] = work
       
     except Exception as error:
+      print(request.user.id)
       print(f"{error=}")
       return redirect('staff:link_account')
 
@@ -101,6 +102,7 @@ def link_account(request):
   available_linked_users = [ str(name) for name in LinkedAccount.objects.all()]
   
   if request.method == 'POST':
+    print(request.user)
 
     #Check if account was linked before now to avoid duplicates
     if str(request.user) in available_linked_users:
@@ -118,6 +120,9 @@ def link_account(request):
           work_details = WorkDetails.objects.get(user=request.user)
           ID, FILE = (work_details.ID_number, work_details.personal_detail.first_name,)
 
+        except WorkDetails.DoesNotExist as err:
+          print(f"{request.user} does not Exist")
+
         except AttributeError as err:
           messages.error(request, "such User does not exist")
           print(f"{err=}")
@@ -128,7 +133,7 @@ def link_account(request):
             form.save(request.user)
             print("\nNew User Added/Linked")
           
-            return redirect('staff:dashboard', pk=request.user.id, user=request.user) 
+            return redirect('staff:dashboard', pk=request.user.id) 
           
           else:
             messages.error(request, "Invalid Credentials !!!")
