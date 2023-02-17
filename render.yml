@@ -5,10 +5,10 @@ databases:
 
 services:
   - type: web
-    name: Infoweb-trial
+    name: infoweb-trial
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn mysite.wsgi:application"
+    startCommand: "gunicorn infoweb/infoweb.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
